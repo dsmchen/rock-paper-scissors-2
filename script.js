@@ -11,6 +11,7 @@ function getComputerChoice() {
 
 let computerScore = 0;
 let humanScore = 0;
+const results = document.querySelector('div');
 
 function playRound(computerChoice, humanChoice) {
   let string = '';
@@ -29,11 +30,16 @@ function playRound(computerChoice, humanChoice) {
     humanScore++;
   }
 
-  console.log(
-    `${string}
-Computer score: ${computerScore}
-Your score: ${humanScore}`
-  );
+  let para = document.createElement('p');
+  para.textContent = `${string} Computer ${computerScore}-${humanScore} Player`;
+  results.appendChild(para);
+
+  if (computerScore === 5 || humanScore === 5) {
+    let overallPara = document.createElement('p');
+    let winner = computerScore === 5 ? 'Computer wins' : 'You win';
+    overallPara.textContent = `*** ${winner} overall! ***`;
+    results.appendChild(overallPara);
+  }
 }
 
 const handleClick = (e) => {
